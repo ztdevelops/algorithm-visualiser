@@ -36,7 +36,10 @@ export class SortingVisualiser extends React.Component {
     }
 
     mergeSort() {
+        const start = window.performance.now();
         const animations = getMergeSortAnimations(this.state.array);
+        // TODO: DOM manipulation to display execution time
+        console.log(`Execution time for merge sort: ${window.performance.now() - start}ms.`)
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const change = i % 3 !== 2;
@@ -56,10 +59,14 @@ export class SortingVisualiser extends React.Component {
                 }, i * TIMEOUT_DURATION);
             }
         }
+        console.log(`Array is sorted: ${this.isSorted()}`);
     }
 
     quickSort() {
+        const start = window.performance.now();
         const animations = getQuickSortAnimations(this.state.array);
+        // TODO: DOM manipulation to display execution time
+        console.log(`Execution time for quick sort: ${window.performance.now() - start}ms.`)
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const [operation, pivot, left, right] = animations[i];
