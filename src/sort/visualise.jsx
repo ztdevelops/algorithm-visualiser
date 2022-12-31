@@ -2,6 +2,12 @@ import React from "react";
 import './styles.css'
 import { getMergeSortAnimations, getQuickSortAnimations } from "./animations";
 
+const ARR_SIZE          = 200;
+const DEFAULT_COLOUR    = 'darkgreen';
+const PRIMARY_COLOUR    = 'greenyellow';
+const SECONDARY_COLOUR  = 'red';
+const TIMEOUT_DURATION  = 2;
+
 export class SortingVisualiser extends React.Component {
     constructor(props) {
         super(props);
@@ -19,13 +25,13 @@ export class SortingVisualiser extends React.Component {
     // Creates an array and pushes 100 random values
     generateNewArray() {
         let array = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < ARR_SIZE; i++) {
             let randomNum = generateRandomInt(10, 500);
             array.push(randomNum);
         }
         this.setState({ array });
         Array.from(document.getElementsByClassName('array-bar')).forEach((bar) => {
-            bar.style.backgroundColor = 'darkgreen';
+            bar.style.backgroundColor = DEFAULT_COLOUR;
         })
     }
 
@@ -38,16 +44,16 @@ export class SortingVisualiser extends React.Component {
             const leftStyle = arrayBars[leftIdx].style;
             if (change) {
                 const rightStyle = arrayBars[rightIdx].style;
-                const color = i % 3 === 0 ? 'red' : 'greenyellow';
+                const color = i % 3 === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
                 setTimeout(() => {
                     leftStyle.backgroundColor = color;
                     rightStyle.backgroundColor = color;
-                }, i * 2);
+                }, i * TIMEOUT_DURATION);
             } else {
                 setTimeout(() => {
                     // rightIdx represents height when i % 3 == 2
                     leftStyle.height = `${rightIdx}px`;
-                }, i * 2);
+                }, i * TIMEOUT_DURATION);
             }
         }
     }
@@ -64,10 +70,10 @@ export class SortingVisualiser extends React.Component {
                 // Checking values
                 setTimeout(() => {
                     const rightStyle = arrayBars[right].style;
-                    pivotStyle.backgroundColor = 'red';
-                    leftStyle.backgroundColor = operation === 0 ? 'red' : 'greenyellow';
-                    rightStyle.backgroundColor = operation === 0 ? 'red' : 'greenyellow';
-                }, i * 200);
+                    pivotStyle.backgroundColor = SECONDARY_COLOUR;
+                    leftStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+                    rightStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+                }, i * TIMEOUT_DURATION);
             }
             else if (operation === 1) {
                 // Swapping values
@@ -77,7 +83,7 @@ export class SortingVisualiser extends React.Component {
                     const rightHeight = rightStyle.height;
                     leftStyle.height = rightHeight;
                     rightStyle.height = leftHeight;
-                }, i * 200);
+                }, i * TIMEOUT_DURATION);
 
             } else {
                 // Swapping pivot with right + 1
@@ -86,9 +92,9 @@ export class SortingVisualiser extends React.Component {
                     const leftHeight = leftStyle.height;
                     pivotStyle.height = leftHeight;
                     leftStyle.height = pivotHeight;
-                    leftStyle.backgroundColor = 'greenyellow';
-                    pivotStyle.backgroundColor = 'greenyellow';
-                }, i*200);
+                    leftStyle.backgroundColor = PRIMARY_COLOUR;
+                    pivotStyle.backgroundColor = PRIMARY_COLOUR;
+                }, i * TIMEOUT_DURATION);
             }
         }
     }
