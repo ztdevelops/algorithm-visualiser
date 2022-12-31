@@ -1,8 +1,8 @@
 .array-bar {
     width: 4px;
-    background-color: greenyellow;
+    background-color: darkgreen;
     display: inline-block;
-    margin: 0 1px;
+    margin: 0 0.5px;
 }
 
 .array-container {

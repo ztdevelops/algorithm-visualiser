@@ -23,8 +23,10 @@ export class SortingVisualiser extends React.Component {
             let randomNum = generateRandomInt(10, 500);
             array.push(randomNum);
         }
-
         this.setState({ array });
+        Array.from(document.getElementsByClassName('array-bar')).forEach((bar) => {
+            bar.style.backgroundColor = 'darkgreen';
+        })
     }
 
     mergeSort() {
