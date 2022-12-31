@@ -1,6 +1,6 @@
 import React from "react";
 import './styles.css'
-import { getMergeSortAnimations } from "./algorithms";
+import { getMergeSortAnimations, getQuickSortAnimations } from "./animations";
 
 export class SortingVisualiser extends React.Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export class SortingVisualiser extends React.Component {
     // Creates an array and pushes 100 random values
     generateNewArray() {
         let array = [];
-        for (let i = 0; i < 300; i++) {
+        for (let i = 0; i < 10; i++) {
             let randomNum = generateRandomInt(10, 500);
             array.push(randomNum);
         }
@@ -52,6 +52,47 @@ export class SortingVisualiser extends React.Component {
         }
     }
 
+    quickSort() {
+        const animations = getQuickSortAnimations(this.state.array);
+        for (let i = 0; i < animations.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const [operation, pivot, left, right] = animations[i];
+            const pivotStyle = arrayBars[pivot].style;
+            const leftStyle = arrayBars[left].style;
+
+            if (operation === 0 || operation === 0.5) {
+                // Checking values
+                setTimeout(() => {
+                    const rightStyle = arrayBars[right].style;
+                    pivotStyle.backgroundColor = 'red';
+                    leftStyle.backgroundColor = operation === 0 ? 'red' : 'greenyellow';
+                    rightStyle.backgroundColor = operation === 0 ? 'red' : 'greenyellow';
+                }, i * 200);
+            }
+            else if (operation === 1) {
+                // Swapping values
+                setTimeout(() => {
+                    const rightStyle = arrayBars[right].style;
+                    const leftHeight = leftStyle.height;
+                    const rightHeight = rightStyle.height;
+                    leftStyle.height = rightHeight;
+                    rightStyle.height = leftHeight;
+                }, i * 200);
+
+            } else {
+                // Swapping pivot with right + 1
+                setTimeout(() => {
+                    const pivotHeight = pivotStyle.height;
+                    const leftHeight = leftStyle.height;
+                    pivotStyle.height = leftHeight;
+                    leftStyle.height = pivotHeight;
+                    leftStyle.backgroundColor = 'greenyellow';
+                    pivotStyle.backgroundColor = 'greenyellow';
+                }, i*200);
+            }
+        }
+    }
+
     render() {
         const { array } = this.state;
 
@@ -66,6 +107,7 @@ export class SortingVisualiser extends React.Component {
                     </div>
                     <button onClick={() => this.generateNewArray()}>Generate a new array!</button>
                     <button onClick={() => this.mergeSort()}>Merge Sort</button>
+                    <button onClick={() => this.quickSort()}>Quick Sort</button>
                 </div>
             </>
         )
