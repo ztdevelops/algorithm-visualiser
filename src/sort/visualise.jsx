@@ -69,10 +69,16 @@ export class SortingVisualiser extends React.Component {
             if (operation === 0 || operation === 0.5) {
                 // Checking values
                 setTimeout(() => {
-                    const rightStyle = arrayBars[right].style;
                     pivotStyle.backgroundColor = 'purple';
                     leftStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
-                    rightStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+                    // pIdx might still be -1 if there are no values that are
+                    // smaller than or equal to pivot yet. Given this, we do
+                    // not want to display the indication if it does not exist
+                    // yet.
+                    if (right !== -1) {
+                        const rightStyle = arrayBars[right].style;
+                        rightStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;                        
+                    }
                 }, i * TIMEOUT_DURATION);
             }
             else if (operation === 1) {
@@ -97,6 +103,17 @@ export class SortingVisualiser extends React.Component {
                 }, i * TIMEOUT_DURATION);
             }
         }
+        console.log(`Array is sorted: ${this.isSorted()}`);
+    }
+
+    isSorted() {
+        const array = this.state.array;
+        for (let i = 1; i < array.length; i++) {
+            if (array[i] < array[i-1]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     render() {
