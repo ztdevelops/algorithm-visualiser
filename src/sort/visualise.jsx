@@ -6,7 +6,7 @@ const ARR_SIZE          = 200;
 const DEFAULT_COLOUR    = 'darkgreen';
 const PRIMARY_COLOUR    = 'greenyellow';
 const SECONDARY_COLOUR  = 'red';
-const TIMEOUT_DURATION  = 2;
+const TIMEOUT_DURATION  = 5;
 
 export class SortingVisualiser extends React.Component {
     constructor(props) {
@@ -70,7 +70,7 @@ export class SortingVisualiser extends React.Component {
                 // Checking values
                 setTimeout(() => {
                     const rightStyle = arrayBars[right].style;
-                    pivotStyle.backgroundColor = SECONDARY_COLOUR;
+                    pivotStyle.backgroundColor = 'purple';
                     leftStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
                     rightStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
                 }, i * TIMEOUT_DURATION);
