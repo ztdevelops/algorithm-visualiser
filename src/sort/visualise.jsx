@@ -1,6 +1,6 @@
 import React from "react";
-import './SortingVisualiser.css'
-import { getMergeSortAnimations } from "../SortingAlgorithms/SortingAlgorithms";
+import './styles.css'
+import { getMergeSortAnimations } from "./algorithms";
 
 export class SortingVisualiser extends React.Component {
     constructor(props) {

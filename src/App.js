@@ -1,5 +1,5 @@
 import './App.css';
-import SortingVisualiser from './SortingVisualiser/SortingVisualiser'
+import SortingVisualiser from './sort/visualise'
 
 function App() {
   return (
