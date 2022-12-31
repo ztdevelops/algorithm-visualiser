@@ -64,27 +64,27 @@ export class SortingVisualiser extends React.Component {
             const arrayBars = document.getElementsByClassName('array-bar');
             const [operation, pivot, left, right] = animations[i];
             const pivotStyle = arrayBars[pivot].style;
-            const leftStyle = arrayBars[left].style;
+            const rightStyle = arrayBars[right].style;
 
             if (operation === 0 || operation === 0.5) {
                 // Checking values
                 setTimeout(() => {
                     pivotStyle.backgroundColor = 'purple';
-                    leftStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+                    rightStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
                     // pIdx might still be -1 if there are no values that are
                     // smaller than or equal to pivot yet. Given this, we do
                     // not want to display the indication if it does not exist
                     // yet.
-                    if (right !== -1) {
-                        const rightStyle = arrayBars[right].style;
-                        rightStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;                        
+                    if (left !== -1) {
+                        const leftStyle = arrayBars[left].style;
+                        leftStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;                        
                     }
                 }, i * TIMEOUT_DURATION);
             }
             else if (operation === 1) {
                 // Swapping values
                 setTimeout(() => {
-                    const rightStyle = arrayBars[right].style;
+                    const leftStyle = arrayBars[left].style;
                     const leftHeight = leftStyle.height;
                     const rightHeight = rightStyle.height;
                     leftStyle.height = rightHeight;
@@ -95,10 +95,10 @@ export class SortingVisualiser extends React.Component {
                 // Swapping pivot with right + 1
                 setTimeout(() => {
                     const pivotHeight = pivotStyle.height;
-                    const leftHeight = leftStyle.height;
-                    pivotStyle.height = leftHeight;
-                    leftStyle.height = pivotHeight;
-                    leftStyle.backgroundColor = PRIMARY_COLOUR;
+                    const swapHeight = rightStyle.height;
+                    pivotStyle.height = swapHeight;
+                    rightStyle.height = pivotHeight;
+                    rightStyle.backgroundColor = PRIMARY_COLOUR;
                     pivotStyle.backgroundColor = PRIMARY_COLOUR;
                 }, i * TIMEOUT_DURATION);
             }
