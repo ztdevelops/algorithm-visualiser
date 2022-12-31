@@ -1,0 +1,13 @@
+.array-bar {
+    width: 4px;
+    background-color: greenyellow;
+    display: inline-block;
+    margin: 0 1px;
+}
+
+.array-container {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
