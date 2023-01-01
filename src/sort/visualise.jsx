@@ -182,7 +182,6 @@ export class SortingVisualiser extends React.Component {
             // Reached the end
             } else {
                 setTimeout(() => {
-                    completed++;
                     rightStyle.backgroundColor = FINISHED_COLOUR;
                 }, i * TIMEOUT_DURATION);
             }
