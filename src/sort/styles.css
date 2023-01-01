@@ -39,33 +39,33 @@
     word-wrap: break-word;
 }
 
-.sort-buttons:hover {
+.custom-buttons:hover {
     background-color: #F3F4F6;
     text-decoration: none;
     transition-duration: 0.1s;
 }
 
-.sort-buttons:disabled {
+.custom-buttons:disabled {
     background-color: #FAFBFC;
     border-color: rgba(27, 31, 35, 0.15);
     color: #959DA5;
     cursor: default;
 }
 
-.sort-buttons:active {
+.custom-buttons:active {
     background-color: #EDEFF2;
     box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
     transition: none 0s;
 }
 
-.sort-buttons:focus {
+.custom-buttons:focus {
     outline: 1px transparent;
 }
 
-.sort-buttons:before {
+.custom-buttons:before {
     display: none;
 }
 
-.sort-buttons:-webkit-details-marker {
+.custom-buttons:-webkit-details-marker {
     display: none;
 }
