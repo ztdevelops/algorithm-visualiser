@@ -198,7 +198,7 @@ export class SortingVisualiser extends React.Component {
             const originalStyle = arrayBars[original].style;
             const leftStyle = arrayBars[left].style;
             const rightStyle = arrayBars[right].style;
-            if (operation === 0 || operation == 0.5) {
+            if (operation === 0 || operation === 0.5) {
                 setTimeout(() => {
                     const leftHeight = leftStyle.height;
                     const rightHeight = rightStyle.height;
