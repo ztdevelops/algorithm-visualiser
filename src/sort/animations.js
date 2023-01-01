@@ -16,3 +16,9 @@ export function getQuickSortAnimations(array) {
     return animations;
 }
 
+export function getHeapSortAnimations(array) {
+    const animations = [];
+    if (1 >= array.length) return array;
+    algorithms.heapSort(array, animations);
+    return animations;
+}

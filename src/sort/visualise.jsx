@@ -1,6 +1,6 @@
 import React from "react";
 import './styles.css'
-import { getMergeSortAnimations, getQuickSortAnimations } from "./animations";
+import { getHeapSortAnimations, getMergeSortAnimations, getQuickSortAnimations } from "./animations";
 
 const ARR_SIZE          = 200;
 const DEFAULT_COLOUR    = 'darkgreen';
@@ -84,7 +84,7 @@ export class SortingVisualiser extends React.Component {
                     // yet.
                     if (left !== -1) {
                         const leftStyle = arrayBars[left].style;
-                        leftStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;                        
+                        leftStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
                     }
                 }, i * TIMEOUT_DURATION);
             }
@@ -113,10 +113,52 @@ export class SortingVisualiser extends React.Component {
         console.log(`Array is sorted: ${this.isSorted()}`);
     }
 
+    heapSort() {
+        const start = window.performance.now();
+        const animations = getHeapSortAnimations(this.state.array);
+        // TODO: DOM manipulation to display execution time
+        console.log(`Execution time for heap sort: ${window.performance.now() - start}ms.`)
+        for (let i = 0; i < animations.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const operation = animations[i][0];
+            const rootStyle = arrayBars[animations[i][1]].style;
+            // Getting largest
+            if (operation === 0 || operation === 0.5) {
+                setTimeout(() => {
+                    const largestStyle = arrayBars[animations[i][2]].style;
+                    rootStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+                    largestStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+                }, i * TIMEOUT_DURATION);
+            // Swapping largest if required
+            } else if (operation === 1) {
+                setTimeout(() => {
+                    const largestStyle = arrayBars[animations[i][2]].style;
+                    const largestHeight = largestStyle.height;
+                    const rootHeight = rootStyle.height;
+                    largestStyle.height = rootHeight;
+                    rootStyle.height = largestHeight;
+                    largestStyle.backgroundColor = PRIMARY_COLOUR;
+                    rootStyle.backgroundColor = PRIMARY_COLOUR;
+                }, i * TIMEOUT_DURATION);
+            } else {
+                setTimeout(() => {
+                    const swappedStyle = arrayBars[animations[i][2]].style;
+                    const swappedHeight = swappedStyle.height;
+                    const rootHeight = rootStyle.height;
+                    swappedStyle.height = rootHeight;
+                    rootStyle.height = swappedHeight;
+                    swappedStyle.backgroundColor = PRIMARY_COLOUR;
+                    rootStyle.backgroundColor = PRIMARY_COLOUR;
+                }, i * TIMEOUT_DURATION);
+            }
+        }
+        console.log(`Array is sorted: ${this.isSorted()}`);
+    }
+
     isSorted() {
         const array = this.state.array;
         for (let i = 1; i < array.length; i++) {
-            if (array[i] < array[i-1]) {
+            if (array[i] < array[i - 1]) {
                 return false;
             }
         }
@@ -138,6 +180,7 @@ export class SortingVisualiser extends React.Component {
                     <button onClick={() => this.generateNewArray()}>Generate a new array!</button>
                     <button onClick={() => this.mergeSort()}>Merge Sort</button>
                     <button onClick={() => this.quickSort()}>Quick Sort</button>
+                    <button onClick={() => this.heapSort()}>Heap Sort</button>
                 </div>
             </>
         )
