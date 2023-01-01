@@ -22,3 +22,10 @@ export function getHeapSortAnimations(array) {
     algorithms.heapSort(array, animations);
     return animations;
 }
+
+export function getBubbleSortAnimations(array) {
+    const animations = [];
+    if (1 >= array.length) return array;
+    algorithms.bubbleSort(array, animations);
+    return animations;
+}

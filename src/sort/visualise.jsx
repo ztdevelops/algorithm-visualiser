@@ -1,11 +1,12 @@
 import React from "react";
 import './styles.css'
-import { getHeapSortAnimations, getMergeSortAnimations, getQuickSortAnimations } from "./animations";
+import { getBubbleSortAnimations, getHeapSortAnimations, getMergeSortAnimations, getQuickSortAnimations } from "./animations";
 
 const ARR_SIZE          = 200;
 const DEFAULT_COLOUR    = 'darkgreen';
 const PRIMARY_COLOUR    = 'greenyellow';
 const SECONDARY_COLOUR  = 'red';
+const FINISHED_COLOUR   = 'mediumseagreen';
 const TIMEOUT_DURATION  = 5;
 
 export class SortingVisualiser extends React.Component {
@@ -147,12 +148,45 @@ export class SortingVisualiser extends React.Component {
                     const rootHeight = rootStyle.height;
                     swappedStyle.height = rootHeight;
                     rootStyle.height = swappedHeight;
-                    swappedStyle.backgroundColor = PRIMARY_COLOUR;
+                    swappedStyle.backgroundColor = FINISHED_COLOUR;
                     rootStyle.backgroundColor = PRIMARY_COLOUR;
                 }, i * TIMEOUT_DURATION);
             }
         }
         console.log(`Array is sorted: ${this.isSorted()}`);
+    }
+
+    bubbleSort() {
+        const start = window.performance.now();
+        const animations = getBubbleSortAnimations(this.state.array);
+        console.log(`Execution time for bubble sort: ${window.performance.now() - start}ms.`)
+        for (let i = 0; i < animations.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const [ operation, left, right ] = animations[i];
+            const leftStyle = arrayBars[left].style;
+            const rightStyle = arrayBars[right].style;
+            // Checking
+            if (operation === 0 || operation === 0.5) {
+                setTimeout(() => {
+                    leftStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+                    rightStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+                }, i * TIMEOUT_DURATION);
+            // Swapping
+            } else if (operation === 1) {
+                setTimeout(() => {
+                    const leftHeight = leftStyle.height;
+                    const rightHeight = rightStyle.height;
+                    leftStyle.height = rightHeight;
+                    rightStyle.height = leftHeight;
+                }, i * TIMEOUT_DURATION);
+            // Reached the end
+            } else {
+                setTimeout(() => {
+                    completed++;
+                    rightStyle.backgroundColor = FINISHED_COLOUR;
+                }, i * TIMEOUT_DURATION);
+            }
+        }
     }
 
     isSorted() {
@@ -181,6 +215,7 @@ export class SortingVisualiser extends React.Component {
                     <button onClick={() => this.mergeSort()}>Merge Sort</button>
                     <button onClick={() => this.quickSort()}>Quick Sort</button>
                     <button onClick={() => this.heapSort()}>Heap Sort</button>
+                    <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
                 </div>
             </>
         )
