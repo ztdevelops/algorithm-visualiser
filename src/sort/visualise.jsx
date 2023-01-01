@@ -242,13 +242,14 @@ export class SortingVisualiser extends React.Component {
                         ))}
                     </div>
 
-                    <button onClick={() => this.generateNewArray()}>Generate a new array!</button>
+                    <button className="custom-buttons" onClick={() => this.generateNewArray()}>Generate a new array!</button>
                     <hr></hr>
-                    <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
-                    <button onClick={() => this.insertionSort()}>Insertion Sort</button>
-                    <button onClick={() => this.mergeSort()}>Merge Sort</button>
-                    <button onClick={() => this.quickSort()}>Quick Sort</button>
-                    <button onClick={() => this.heapSort()}>Heap Sort</button>
+                    <button className="custom-buttons" onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                    <button className="custom-buttons" onClick={() => this.insertionSort()}>Insertion Sort</button>
+                    <button className="custom-buttons" onClick={() => this.mergeSort()}>Merge Sort</button>
+                    <button className="custom-buttons" onClick={() => this.quickSort()}>Quick Sort</button>
+                    <button className="custom-buttons" onClick={() => this.heapSort()}>Heap Sort</button>
+
                 </div>
             </>
         )
