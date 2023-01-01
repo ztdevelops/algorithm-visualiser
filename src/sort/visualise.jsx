@@ -36,9 +36,23 @@ export class SortingVisualiser extends React.Component {
         })
     }
 
+    temporaryDisable(i) {
+        const buttons = document.getElementsByClassName('sort');
+        Array.from(buttons).forEach(button => {
+            button.disabled = true;
+        });
+
+        setTimeout(() => {
+            Array.from(buttons).forEach(button => {
+                button.disabled = false;
+            });
+        }, i * TIMEOUT_DURATION);
+    }
+
     mergeSort() {
         const start = window.performance.now();
         const animations = getMergeSortAnimations(this.state.array);
+        this.temporaryDisable(animations.length);
         // TODO: DOM manipulation to display execution time
         console.log(`Execution time for merge sort: ${window.performance.now() - start}ms.`)
         for (let i = 0; i < animations.length; i++) {
@@ -66,6 +80,7 @@ export class SortingVisualiser extends React.Component {
     quickSort() {
         const start = window.performance.now();
         const animations = getQuickSortAnimations(this.state.array);
+        this.temporaryDisable(animations.length);
         // TODO: DOM manipulation to display execution time
         console.log(`Execution time for quick sort: ${window.performance.now() - start}ms.`)
         for (let i = 0; i < animations.length; i++) {
@@ -117,6 +132,7 @@ export class SortingVisualiser extends React.Component {
     heapSort() {
         const start = window.performance.now();
         const animations = getHeapSortAnimations(this.state.array);
+        this.temporaryDisable(animations.length);
         // TODO: DOM manipulation to display execution time
         console.log(`Execution time for heap sort: ${window.performance.now() - start}ms.`)
         for (let i = 0; i < animations.length; i++) {
@@ -159,6 +175,7 @@ export class SortingVisualiser extends React.Component {
     bubbleSort() {
         const start = window.performance.now();
         const animations = getBubbleSortAnimations(this.state.array);
+        this.temporaryDisable(animations.length);
         console.log(`Execution time for bubble sort: ${window.performance.now() - start}ms.`)
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
@@ -191,6 +208,7 @@ export class SortingVisualiser extends React.Component {
     insertionSort() {
         const start = window.performance.now();
         const animations = getInsertionSortAnimations(this.state.array);
+        this.temporaryDisable(animations.length);
         console.log(`Execution time for insertion sort: ${window.performance.now() - start}ms.`)
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
@@ -242,13 +260,13 @@ export class SortingVisualiser extends React.Component {
                         ))}
                     </div>
 
-                    <button className="custom-buttons" onClick={() => this.generateNewArray()}>Generate a new array!</button>
+                    <button className="custom-buttons sort" onClick={() => this.generateNewArray()}>Generate a new array!</button>
                     <hr></hr>
-                    <button className="custom-buttons" onClick={() => this.bubbleSort()}>Bubble Sort</button>
-                    <button className="custom-buttons" onClick={() => this.insertionSort()}>Insertion Sort</button>
-                    <button className="custom-buttons" onClick={() => this.mergeSort()}>Merge Sort</button>
-                    <button className="custom-buttons" onClick={() => this.quickSort()}>Quick Sort</button>
-                    <button className="custom-buttons" onClick={() => this.heapSort()}>Heap Sort</button>
+                    <button className="custom-buttons sort" onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                    <button className="custom-buttons sort" onClick={() => this.insertionSort()}>Insertion Sort</button>
+                    <button className="custom-buttons sort" onClick={() => this.mergeSort()}>Merge Sort</button>
+                    <button className="custom-buttons sort" onClick={() => this.quickSort()}>Quick Sort</button>
+                    <button className="custom-buttons sort" onClick={() => this.heapSort()}>Heap Sort</button>
 
                 </div>
             </>
