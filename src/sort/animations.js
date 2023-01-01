@@ -29,3 +29,10 @@ export function getBubbleSortAnimations(array) {
     algorithms.bubbleSort(array, animations);
     return animations;
 }
+
+export function getInsertionSortAnimations(array) {
+    const animations = [];
+    if (1 >= array.length) return array;
+    algorithms.insertionSort(array, animations);
+    return animations;
+}
