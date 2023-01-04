@@ -2,12 +2,11 @@ const DEFAULT_COLOUR = 'darkgreen';
 const PRIMARY_COLOUR = 'greenyellow';
 const SECONDARY_COLOUR = 'red';
 const FINISHED_COLOUR = 'mediumseagreen';
+const TEMPLATE_SORT_MESSAGE = 'Sorted with ';
 
 const ARR_SIZE = 200;
 const TIMEOUT_DURATION = 5;
 const MAX_BAR_HEIGHT = 500;
-const MAX_BAR_MULTIPLIER = 60;
-const ARRAY_CONTAINER_HEIGHT = 75;
 
 export { 
     // Colours
@@ -17,4 +16,5 @@ export {
     // Others
     ARR_SIZE, TIMEOUT_DURATION, MAX_BAR_HEIGHT,
     MAX_BAR_MULTIPLIER, ARRAY_CONTAINER_HEIGHT,
+    TEMPLATE_SORT_MESSAGE,
 }

@@ -1,10 +1,10 @@
 import { TIMEOUT_DURATION, PRIMARY_COLOUR, SECONDARY_COLOUR } from "../../utils/config";
-import { temporaryButtonDisable } from "../../utils/temporaryButtonDisable";
+import { disableSortButtonsAndUpdateInformationDOM } from "../../utils/standardOperations";
 
 function animateInsertionSort(array) {
     const start = window.performance.now();
     const animations = getInsertionSortAnimations(array);
-    temporaryButtonDisable(animations.length, 'sort', TIMEOUT_DURATION);
+    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Insertion Sort ( O(n<sup>2</sup>) )', animations.length);
     console.log(`Execution time for insertion sort: ${window.performance.now() - start}ms.`)
     for (let i = 0; i < animations.length; i++) {
         const arrayBars = document.getElementsByClassName('array-bar');
