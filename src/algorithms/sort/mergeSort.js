@@ -4,7 +4,7 @@ import { disableSortButtonsAndUpdateInformationDOM } from "../../utils/standardO
 function animateMergeSort(array) {
     const start = window.performance.now();
     const animations = getMergeSortAnimations(array);
-    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Merge Sort ( O(nlog n) )', animations.length);
+    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Merge Sort <br>O(nlog n)', animations.length);
     // TODO: DOM manipulation to display execution time
     console.log(`Execution time for merge sort: ${window.performance.now() - start}ms.`)
     for (let i = 0; i < animations.length; i++) {

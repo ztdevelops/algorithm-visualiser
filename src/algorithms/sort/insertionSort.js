@@ -4,7 +4,7 @@ import { disableSortButtonsAndUpdateInformationDOM } from "../../utils/standardO
 function animateInsertionSort(array) {
     const start = window.performance.now();
     const animations = getInsertionSortAnimations(array);
-    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Insertion Sort ( O(n<sup>2</sup>) )', animations.length);
+    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Insertion Sort <br>O(n<sup>2</sup>)', animations.length);
     console.log(`Execution time for insertion sort: ${window.performance.now() - start}ms.`)
     for (let i = 0; i < animations.length; i++) {
         const arrayBars = document.getElementsByClassName('array-bar');
