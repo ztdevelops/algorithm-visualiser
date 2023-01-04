@@ -4,7 +4,7 @@ import { disableSortButtonsAndUpdateInformationDOM } from "../../utils/standardO
 function animateBubbleSort(array) {
     const start = window.performance.now();
     const animations = getBubbleSortAnimations(array);
-    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Bubble Sort ( O(n<sup>2</sup>) )', animations.length);
+    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Bubble Sort <br>O(n<sup>2</sup>)', animations.length);
     console.log(`Execution time for bubble sort: ${window.performance.now() - start}ms.`)
     for (let i = 0; i < animations.length; i++) {
         const arrayBars = document.getElementsByClassName('array-bar');

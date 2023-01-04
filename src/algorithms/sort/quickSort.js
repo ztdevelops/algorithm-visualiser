@@ -4,7 +4,7 @@ import { disableSortButtonsAndUpdateInformationDOM } from "../../utils/standardO
 function animateQuickSort(array) {
     const start = window.performance.now();
     const animations = getQuickSortAnimations(array);
-    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Quick Sort ( O(nlog n) )', animations.length);
+    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Quick Sort <br>O(nlog n)', animations.length);
     // TODO: DOM manipulation to display execution time
     console.log(`Execution time for quick sort: ${window.performance.now() - start}ms.`)
     for (let i = 0; i < animations.length; i++) {

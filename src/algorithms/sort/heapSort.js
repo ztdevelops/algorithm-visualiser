@@ -4,7 +4,7 @@ import { disableSortButtonsAndUpdateInformationDOM } from "../../utils/standardO
 function animateHeapSort(array) {
     const start = window.performance.now();
     const animations = getHeapSortAnimations(array);
-    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Heap Sort ( O(nlog n) )', animations.length);
+    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Heap Sort<br>O(nlog n)', animations.length);
     // TODO: DOM manipulation to display execution time
     console.log(`Execution time for heap sort: ${window.performance.now() - start}ms.`)
     for (let i = 0; i < animations.length; i++) {
