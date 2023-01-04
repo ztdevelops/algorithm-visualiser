@@ -1,10 +1,10 @@
 import { TIMEOUT_DURATION, PRIMARY_COLOUR, SECONDARY_COLOUR, MAX_BAR_HEIGHT, MAX_BAR_MULTIPLIER } from "../../utils/config";
-import { temporaryButtonDisable } from "../../utils/temporaryButtonDisable";
+import { disableSortButtonsAndUpdateInformationDOM } from "../../utils/standardOperations";
 
 function animateMergeSort(array) {
     const start = window.performance.now();
     const animations = getMergeSortAnimations(array);
-    temporaryButtonDisable(animations.length, 'sort', TIMEOUT_DURATION);
+    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Merge Sort ( O(nlog n) )', animations.length);
     // TODO: DOM manipulation to display execution time
     console.log(`Execution time for merge sort: ${window.performance.now() - start}ms.`)
     for (let i = 0; i < animations.length; i++) {

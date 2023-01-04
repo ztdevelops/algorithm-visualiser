@@ -1,10 +1,10 @@
 import { TIMEOUT_DURATION, PRIMARY_COLOUR, SECONDARY_COLOUR, FINISHED_COLOUR } from "../../utils/config";
-import { temporaryButtonDisable } from "../../utils/temporaryButtonDisable";
+import { disableSortButtonsAndUpdateInformationDOM } from "../../utils/standardOperations";
 
 function animateBubbleSort(array) {
     const start = window.performance.now();
     const animations = getBubbleSortAnimations(array);
-    temporaryButtonDisable(animations.length, 'sort', TIMEOUT_DURATION);
+    disableSortButtonsAndUpdateInformationDOM(window.performance.now() - start, 'Bubble Sort ( O(n<sup>2</sup>) )', animations.length);
     console.log(`Execution time for bubble sort: ${window.performance.now() - start}ms.`)
     for (let i = 0; i < animations.length; i++) {
         const arrayBars = document.getElementsByClassName('array-bar');
