@@ -1,4 +1,49 @@
-export function getHeapSortAnimations(array) {
+import { TIMEOUT_DURATION, PRIMARY_COLOUR, SECONDARY_COLOUR, FINISHED_COLOUR } from "../../utils/config";
+import { temporaryButtonDisable } from "../../utils/temporaryButtonDisable";
+
+function animateHeapSort(array) {
+    const start = window.performance.now();
+    const animations = getHeapSortAnimations(array);
+    temporaryButtonDisable(animations.length, 'sort', TIMEOUT_DURATION);
+    // TODO: DOM manipulation to display execution time
+    console.log(`Execution time for heap sort: ${window.performance.now() - start}ms.`)
+    for (let i = 0; i < animations.length; i++) {
+        const arrayBars = document.getElementsByClassName('array-bar');
+        const operation = animations[i][0];
+        const rootStyle = arrayBars[animations[i][1]].style;
+        // Getting largest
+        if (operation === 0 || operation === 0.5) {
+            setTimeout(() => {
+                const largestStyle = arrayBars[animations[i][2]].style;
+                rootStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+                largestStyle.backgroundColor = operation === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+            }, i * TIMEOUT_DURATION);
+            // Swapping largest if required
+        } else if (operation === 1) {
+            setTimeout(() => {
+                const largestStyle = arrayBars[animations[i][2]].style;
+                const largestHeight = largestStyle.height;
+                const rootHeight = rootStyle.height;
+                largestStyle.height = rootHeight;
+                rootStyle.height = largestHeight;
+                largestStyle.backgroundColor = PRIMARY_COLOUR;
+                rootStyle.backgroundColor = PRIMARY_COLOUR;
+            }, i * TIMEOUT_DURATION);
+        } else {
+            setTimeout(() => {
+                const swappedStyle = arrayBars[animations[i][2]].style;
+                const swappedHeight = swappedStyle.height;
+                const rootHeight = rootStyle.height;
+                swappedStyle.height = rootHeight;
+                rootStyle.height = swappedHeight;
+                swappedStyle.backgroundColor = FINISHED_COLOUR;
+                rootStyle.backgroundColor = PRIMARY_COLOUR;
+            }, i * TIMEOUT_DURATION);
+        }
+    }
+}
+
+function getHeapSortAnimations(array) {
     const animations = [];
     if (1 >= array.length) return array;
     heapSort(array, animations);
@@ -39,3 +84,5 @@ function heapify(array, n, i, animations) {
         heapify(array, n, largest, animations);
     }
 }
+
+export { animateHeapSort }

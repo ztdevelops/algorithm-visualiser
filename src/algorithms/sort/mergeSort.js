@@ -1,4 +1,34 @@
-export function getMergeSortAnimations(array) {
+import { TIMEOUT_DURATION, PRIMARY_COLOUR, SECONDARY_COLOUR } from "../../utils/config";
+import { temporaryButtonDisable } from "../../utils/temporaryButtonDisable";
+
+function animateMergeSort(array) {
+    const start = window.performance.now();
+    const animations = getMergeSortAnimations(array);
+    temporaryButtonDisable(animations.length, 'sort', TIMEOUT_DURATION);
+    // TODO: DOM manipulation to display execution time
+    console.log(`Execution time for merge sort: ${window.performance.now() - start}ms.`)
+    for (let i = 0; i < animations.length; i++) {
+        const arrayBars = document.getElementsByClassName('array-bar');
+        const change = i % 3 !== 2;
+        const [leftIdx, rightIdx] = animations[i];
+        const leftStyle = arrayBars[leftIdx].style;
+        if (change) {
+            const rightStyle = arrayBars[rightIdx].style;
+            const color = i % 3 === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+            setTimeout(() => {
+                leftStyle.backgroundColor = color;
+                rightStyle.backgroundColor = color;
+            }, i * TIMEOUT_DURATION);
+        } else {
+            setTimeout(() => {
+                // rightIdx represents height when i % 3 == 2
+                leftStyle.height = `${rightIdx}px`;
+            }, i * TIMEOUT_DURATION);
+        }
+    }
+}
+
+function getMergeSortAnimations(array) {
     const animations = [];
     if (1 >= array.length) return array;
     const copy = array.slice();
@@ -49,3 +79,5 @@ function merge(array, start, mid, end, copy, animations) {
         k++; j++;
     }
 }
+
+export { animateMergeSort }
