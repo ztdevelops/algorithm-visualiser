@@ -8,6 +8,9 @@ import { animateQuickSort } from "../../algorithms/sort/quickSort";
 
 import { DEFAULT_COLOUR, ARR_SIZE, MAX_BAR_HEIGHT } from "../../utils/config";
 
+import 'react-bootstrap/dist/react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
+
 // TODO: Convert to Functional Component
 export class SortingVisualiserComponent extends React.Component {
     constructor(props) {
@@ -41,21 +44,24 @@ export class SortingVisualiserComponent extends React.Component {
 
         return (
             <>
-                <div>
-                    <div className="array-container">
+                <Container fluid>
+                    <Container className="array-container">
                         {array.map((value, id) => (
-                            <div className="array-bar" key={id} style={{ height: `${value}px` }}>
+                            <div className="array-bar" key={id} style={{ height: `${value/MAX_BAR_HEIGHT*60}vh` }}>
                             </div>
                         ))}
-                    </div>
-                    <button className="custom-buttons sort" onClick={() => this.generateNewArray()}>Generate a new array!</button>
-                    <hr></hr>
-                    <button className="custom-buttons sort" onClick={() => animateBubbleSort(this.state.array)}>Bubble Sort</button>
-                    <button className="custom-buttons sort" onClick={() => animateInsertionSort(this.state.array)}>Insertion Sort</button>
-                    <button className="custom-buttons sort" onClick={() => animateMergeSort(this.state.array)}>Merge Sort</button>
-                    <button className="custom-buttons sort" onClick={() => animateQuickSort(this.state.array)}>Quick Sort</button>
-                    <button className="custom-buttons sort" onClick={() => animateHeapSort(this.state.array)}>Heap Sort</button>
-                </div>
+                    </Container>
+                    <Container fluid>
+                    <Button size="sm" className="sort" variant='dark' onClick={() => this.generateNewArray()}>Generate New Array!</Button>
+                            <hr></hr>
+                            <Button size="sm" className="sort" variant='dark' onClick={() => animateBubbleSort(this.state.array)}>Bubble Sort</Button>
+                            <Button size="sm" className="sort" variant='dark' onClick={() => animateInsertionSort(this.state.array)}>Insertion Sort</Button>
+                            <Button size="sm" className="sort" variant='dark' onClick={() => animateMergeSort(this.state.array)}>Merge Sort</Button>
+                            <Button size="sm" className="sort" variant='dark' onClick={() => animateQuickSort(this.state.array)}>Quick Sort</Button>
+                            <Button size="sm" className="sort" variant='dark' onClick={() => animateHeapSort(this.state.array)}>Heap Sort</Button>
+                    </Container>
+
+                </Container>
             </>
         )
     }
