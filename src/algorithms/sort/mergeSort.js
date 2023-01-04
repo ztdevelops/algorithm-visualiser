@@ -1,4 +1,4 @@
-import { TIMEOUT_DURATION, PRIMARY_COLOUR, SECONDARY_COLOUR } from "../../utils/config";
+import { TIMEOUT_DURATION, PRIMARY_COLOUR, SECONDARY_COLOUR, MAX_BAR_HEIGHT, MAX_BAR_MULTIPLIER } from "../../utils/config";
 import { temporaryButtonDisable } from "../../utils/temporaryButtonDisable";
 
 function animateMergeSort(array) {
@@ -22,7 +22,7 @@ function animateMergeSort(array) {
         } else {
             setTimeout(() => {
                 // rightIdx represents height when i % 3 == 2
-                leftStyle.height = `${rightIdx}px`;
+                leftStyle.height = `${rightIdx / MAX_BAR_HEIGHT * MAX_BAR_MULTIPLIER}vh`;
             }, i * TIMEOUT_DURATION);
         }
     }

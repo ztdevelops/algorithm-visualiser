@@ -6,7 +6,7 @@ import { animateInsertionSort } from "../../algorithms/sort/insertionSort";
 import { animateMergeSort } from "../../algorithms/sort/mergeSort";
 import { animateQuickSort } from "../../algorithms/sort/quickSort";
 
-import { DEFAULT_COLOUR, ARR_SIZE, MAX_BAR_HEIGHT } from "../../utils/config";
+import { DEFAULT_COLOUR, ARR_SIZE, MAX_BAR_HEIGHT, MAX_BAR_MULTIPLIER, ARRAY_CONTAINER_HEIGHT } from "../../utils/config";
 
 import 'react-bootstrap/dist/react-bootstrap';
 import { Button, Container } from 'react-bootstrap';
@@ -45,9 +45,9 @@ export class SortingVisualiserComponent extends React.Component {
         return (
             <>
                 <Container fluid>
-                    <Container className="array-container">
+                    <Container className="array-container" style={{height: `${ARRAY_CONTAINER_HEIGHT}vh`}}>
                         {array.map((value, id) => (
-                            <div className="array-bar" key={id} style={{ height: `${value/MAX_BAR_HEIGHT*60}vh` }}>
+                            <div className="array-bar" key={id} style={{ height: `${value / MAX_BAR_HEIGHT * MAX_BAR_MULTIPLIER}vh` }}>
                             </div>
                         ))}
                     </Container>
