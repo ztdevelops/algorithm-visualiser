@@ -9,6 +9,7 @@ const SECONDARY_COLOUR = 'red';
 const FINISHED_COLOUR = 'mediumseagreen';
 const TIMEOUT_DURATION = 5;
 
+// TODO: Convert to Functional Component
 export class SortingVisualiser extends React.Component {
     constructor(props) {
         super(props);
