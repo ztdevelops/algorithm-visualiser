@@ -9,7 +9,7 @@ import { animateQuickSort } from "../../algorithms/sort/quickSort";
 import { DEFAULT_COLOUR, ARR_SIZE, MAX_BAR_HEIGHT, MAX_BAR_MULTIPLIER, ARRAY_CONTAINER_HEIGHT } from "../../utils/config";
 
 import 'react-bootstrap/dist/react-bootstrap';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 
 // TODO: Convert to Functional Component
 export class SortingVisualiserComponent extends React.Component {
@@ -36,7 +36,10 @@ export class SortingVisualiserComponent extends React.Component {
         this.setState({ array });
         Array.from(document.getElementsByClassName('array-bar')).forEach((bar) => {
             bar.style.backgroundColor = DEFAULT_COLOUR;
-        })
+        });
+
+        document.getElementById("runtime").innerText = "";
+        document.getElementById("sortType").innerText = "";
     }
 
     render() {
@@ -45,20 +48,33 @@ export class SortingVisualiserComponent extends React.Component {
         return (
             <>
                 <Container fluid>
-                    <Container className="array-container" style={{height: `${ARRAY_CONTAINER_HEIGHT}vh`}}>
+                    <Container style={{marginTop: `20px`}}>Size of Array: <b>{ARR_SIZE}</b> elements.</Container>
+                    <Container className="array-container" style={{ height: `${ARRAY_CONTAINER_HEIGHT}vh` }}>
                         {array.map((value, id) => (
                             <div className="array-bar" key={id} style={{ height: `${value / MAX_BAR_HEIGHT * MAX_BAR_MULTIPLIER}vh` }}>
                             </div>
                         ))}
                     </Container>
-                    <Container fluid>
-                    <Button size="sm" className="sort" variant='dark' onClick={() => this.generateNewArray()}>Generate New Array!</Button>
-                            <hr></hr>
-                            <Button size="sm" className="sort" variant='dark' onClick={() => animateBubbleSort(this.state.array)}>Bubble Sort</Button>
-                            <Button size="sm" className="sort" variant='dark' onClick={() => animateInsertionSort(this.state.array)}>Insertion Sort</Button>
-                            <Button size="sm" className="sort" variant='dark' onClick={() => animateMergeSort(this.state.array)}>Merge Sort</Button>
-                            <Button size="sm" className="sort" variant='dark' onClick={() => animateQuickSort(this.state.array)}>Quick Sort</Button>
-                            <Button size="sm" className="sort" variant='dark' onClick={() => animateHeapSort(this.state.array)}>Heap Sort</Button>
+                    <Container>
+                        <Row className="align-items-center">
+                            <Col >
+                                <div id="runtime">
+                                </div>
+                            </Col>
+                            <Col>
+                                <Button size="sm" className="sort" variant='dark' onClick={() => this.generateNewArray()}>Generate New Array!</Button>
+                            </Col>
+                            <Col>
+                                <div id="sortType">
+                                </div>
+                            </Col>
+                        </Row>
+                        <hr></hr>
+                        <Button size="sm" className="sort" variant='dark' onClick={() => animateBubbleSort(this.state.array)}>Bubble Sort</Button>
+                        <Button size="sm" className="sort" variant='dark' onClick={() => animateInsertionSort(this.state.array)}>Insertion Sort</Button>
+                        <Button size="sm" className="sort" variant='dark' onClick={() => animateMergeSort(this.state.array)}>Merge Sort</Button>
+                        <Button size="sm" className="sort" variant='dark' onClick={() => animateQuickSort(this.state.array)}>Quick Sort</Button>
+                        <Button size="sm" className="sort" variant='dark' onClick={() => animateHeapSort(this.state.array)}>Heap Sort</Button>
                     </Container>
 
                 </Container>

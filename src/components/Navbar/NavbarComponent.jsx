@@ -9,13 +9,7 @@ function NavbarComponent() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <NavDropdown title="Categories" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Sorting</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.2">
-                                Pathfinding
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Link href="#sorting">Sorting</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
