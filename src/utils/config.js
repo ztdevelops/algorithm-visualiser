@@ -7,6 +7,8 @@ const TEMPLATE_SORT_MESSAGE = 'Sorted with ';
 const ARR_SIZE = 200;
 const TIMEOUT_DURATION = 5;
 const MAX_BAR_HEIGHT = 500;
+const MAX_BAR_MULTIPLIER = 50;
+const ARRAY_CONTAINER_HEIGHT = 65;
 
 export { 
     // Colours
