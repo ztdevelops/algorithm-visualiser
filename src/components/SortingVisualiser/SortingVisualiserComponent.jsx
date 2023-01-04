@@ -1,6 +1,10 @@
 import React from "react";
-import './styles.css'
-import { getBubbleSortAnimations, getHeapSortAnimations, getInsertionSortAnimations, getMergeSortAnimations, getQuickSortAnimations } from "./animations";
+import './SortingVisualiserStyles.css'
+import { getBubbleSortAnimations } from "../../algorithms/sort/bubbleSort";
+import { getHeapSortAnimations } from "../../algorithms/sort/heapSort";
+import { getInsertionSortAnimations } from "../../algorithms/sort/insertionSort";
+import { getMergeSortAnimations } from "../../algorithms/sort/mergeSort";
+import { getQuickSortAnimations } from "../../algorithms/sort/quickSort";
 
 const ARR_SIZE = 200;
 const DEFAULT_COLOUR = 'darkgreen';
@@ -10,7 +14,7 @@ const FINISHED_COLOUR = 'mediumseagreen';
 const TIMEOUT_DURATION = 5;
 
 // TODO: Convert to Functional Component
-export class SortingVisualiser extends React.Component {
+export class SortingVisualiserComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -279,4 +283,4 @@ function generateRandomInt(minimum, maximum) {
     return Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
 }
 
-export default SortingVisualiser;
+export default SortingVisualiserComponent;

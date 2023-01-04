@@ -1,14 +1,14 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import SortingVisualiser from './sort/visualise'
-import NavbarComponent from './components/navbar';
+import SortingVisualiserComponent from './components/SortingVisualiser/SortingVisualiserComponent'
+import NavbarComponent from './components/Navbar/NavbarComponent';
 
 function App() {
   return (
     <div className="App">
       <NavbarComponent/>
-      <SortingVisualiser/>
+      <SortingVisualiserComponent/>
     </div>
   );
 }
