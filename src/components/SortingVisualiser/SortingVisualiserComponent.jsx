@@ -1,5 +1,9 @@
-import React from "react";
+import 'react-bootstrap/dist/react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+
 import './SortingVisualiserStyles.css'
+
 import { animateBubbleSort } from "../../algorithms/sort/bubbleSort";
 import { animateHeapSort } from "../../algorithms/sort/heapSort";
 import { animateInsertionSort } from "../../algorithms/sort/insertionSort";
@@ -8,83 +12,69 @@ import { animateQuickSort } from "../../algorithms/sort/quickSort";
 
 import { DEFAULT_COLOUR, ARR_SIZE, MAX_BAR_HEIGHT, MAX_BAR_MULTIPLIER, ARRAY_CONTAINER_HEIGHT } from "../../utils/config";
 
-import 'react-bootstrap/dist/react-bootstrap';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+const SortingVisualiserComponent = () => {
+    const [array, setArray] = useState([]);
 
-// TODO: Convert to Functional Component
-export class SortingVisualiserComponent extends React.Component {
-    constructor(props) {
-        super(props);
+    // ComponentDidMount
+    useEffect(() => {
+        generateArray();
+    }, []);
 
-        this.state = {
-            array: [],
-        }
-    }
-
-    // Is called when component loads
-    componentDidMount() {
-        this.generateNewArray();
-    }
-
-    // Creates an array and pushes 100 random values
-    generateNewArray() {
-        let array = [];
-        for (let i = 0; i < ARR_SIZE; i++) {
-            let randomNum = generateRandomInt(10, MAX_BAR_HEIGHT);
-            array.push(randomNum);
-        }
-        this.setState({ array });
+    useEffect(() => {
         Array.from(document.getElementsByClassName('array-bar')).forEach((bar) => {
             bar.style.backgroundColor = DEFAULT_COLOUR;
-        });
 
-        document.getElementById("runtime").innerText = "";
-        document.getElementById("sortType").innerText = "";
-    }
+            document.getElementById("runtime").innerText = "";
+            document.getElementById("sortType").innerText = "";
+        })
+    }, [array])
 
-    render() {
-        const { array } = this.state;
+    const generateArray = () => {
+        let generatedArray = [];
+        for (let i = 0; i < ARR_SIZE; i++) {
+            generatedArray.push(generateRandomInt(10, MAX_BAR_HEIGHT));
+        }
+        setArray(generatedArray);
+    };
 
-        return (
-            <>
-                <Container fluid>
-                    <Container style={{marginTop: `20px`}}>Size of Array: <b>{ARR_SIZE}</b> elements.</Container>
-                    <Container className="array-container" style={{ height: `${ARRAY_CONTAINER_HEIGHT}vh` }}>
-                        {array.map((value, id) => (
-                            <div className="array-bar" key={id} style={{ height: `${value / MAX_BAR_HEIGHT * MAX_BAR_MULTIPLIER}vh` }}>
-                            </div>
-                        ))}
-                    </Container>
-                    <Container>
-                        <Row className="align-items-center">
-                            <Col >
-                                <div id="runtime">
-                                </div>
-                            </Col>
-                            <Col>
-                                <Button size="sm" className="sort" variant='dark' onClick={() => this.generateNewArray()}>Generate New Array!</Button>
-                            </Col>
-                            <Col>
-                                <div id="sortType">
-                                </div>
-                            </Col>
-                        </Row>
-                        <hr></hr>
-                        <Button size="sm" className="sort" variant='dark' onClick={() => animateBubbleSort(this.state.array)}>Bubble Sort</Button>
-                        <Button size="sm" className="sort" variant='dark' onClick={() => animateInsertionSort(this.state.array)}>Insertion Sort</Button>
-                        <Button size="sm" className="sort" variant='dark' onClick={() => animateMergeSort(this.state.array)}>Merge Sort</Button>
-                        <Button size="sm" className="sort" variant='dark' onClick={() => animateQuickSort(this.state.array)}>Quick Sort</Button>
-                        <Button size="sm" className="sort" variant='dark' onClick={() => animateHeapSort(this.state.array)}>Heap Sort</Button>
-                    </Container>
-
+    return (
+        <>
+            <Container fluid>
+                <Container style={{ marginTop: `20px` }}>Size of Array: <b>{ARR_SIZE}</b> elements.</Container>
+                <Container className="array-container" style={{ height: `${ARRAY_CONTAINER_HEIGHT}vh` }}>
+                    {array.map((value, id) => (
+                        <div className="array-bar" key={id} style={{ height: `${value / MAX_BAR_HEIGHT * MAX_BAR_MULTIPLIER}vh` }}>
+                        </div>
+                    ))}
                 </Container>
-            </>
-        )
-    }
+                <Container>
+                    <Row className="align-items-center">
+                        <Col >
+                            <div id="runtime">
+                            </div>
+                        </Col>
+                        <Col>
+                            <Button size="sm" className="sort" variant='dark' onClick={() => generateArray()}>Generate New Array!</Button>
+                        </Col>
+                        <Col>
+                            <div id="sortType">
+                            </div>
+                        </Col>
+                    </Row>
+                    <hr></hr>
+                    <Button size="sm" className="sort" variant='dark' onClick={() => animateBubbleSort(array)}>Bubble Sort</Button>
+                    <Button size="sm" className="sort" variant='dark' onClick={() => animateInsertionSort(array)}>Insertion Sort</Button>
+                    <Button size="sm" className="sort" variant='dark' onClick={() => animateMergeSort(array)}>Merge Sort</Button>
+                    <Button size="sm" className="sort" variant='dark' onClick={() => animateQuickSort(array)}>Quick Sort</Button>
+                    <Button size="sm" className="sort" variant='dark' onClick={() => animateHeapSort(array)}>Heap Sort</Button>
+                </Container>
+            </Container>
+        </>
+    );
 }
 
-function generateRandomInt(minimum, maximum) {
-    return Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
+const generateRandomInt = (mi, mx) => {
+    return Math.floor(Math.random() * (mx - mi + 1) + mi);
 }
 
 export default SortingVisualiserComponent;

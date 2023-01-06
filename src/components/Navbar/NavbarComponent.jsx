@@ -1,7 +1,7 @@
 import 'react-bootstrap/dist/react-bootstrap';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
-function NavbarComponent() {
+const NavbarComponent = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
